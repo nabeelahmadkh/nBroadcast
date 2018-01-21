@@ -116,7 +116,7 @@ app.engine('.hbs',handlebars({extension: '.hbs'}));
 
 app.set('view engine','.hbs');
 
-var port = 8080;
+var port = (process.env.PORT || 3000);
 
 postsRef.on('value',function(snap){
 	//console.log("ALL THE POSTS ARE ",snap.val());
