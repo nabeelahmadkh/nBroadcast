@@ -1,3 +1,5 @@
+//import { json } from '../../../Library/Caches/typescript/2.6/node_modules/@types/body-parser';
+
 // import { print } from 'util';
 
 // Code for Nbroadcast Posts REST APIs
@@ -11,6 +13,10 @@ var startFirebase = 1;
 var endFirebase = 3;
 var flag = 1;
 var totalLength = 0;
+var lastKey = ""; //Last key saved the last displayed key of the post for enabling PAGINATION
+var startKey = "" //First key for doing pagination 
+var prestart = ""
+
 
 
 
@@ -56,7 +62,8 @@ function snapshotToArray(snapshot) {
         //item.key = childSnapshot.key;
 		//console.log("ITEM CONTENT");			
 		//console.log(item.content);
-        returnArr.push({content: item.content, date: item.date, title: item.title, preview: item.preview, author: item.author, name: item.name, image: item.image1});
+		returnArr.push({content: item.content, date: item.date, title: item.title, preview: item.preview, author: item.author, name: item.name, image: item.image1, key: item.key});
+		console.log(" SNAPSHOT KEY IS ",item.key);
 		//console.log("SNAPSHOT ARRAY  ")
 		//console.log(returnArr)
 	});
@@ -151,21 +158,21 @@ postsRouter.route('/allposts') // books route
 					var output = {title: childSnap.val().title, content: childSnap.val().content, date: childSnap.val().date, author: childSnap.val().author};
 					
 					console.log("JSON OUTPUT VALUE");
-					console.log(output.content);
+					//console.log(output.content);
 					var testArray = contentJsonToArray(output.content);
 
-					console.log(testArray);
+					//console.log(testArray);
 					console.log(testArray.length);
 					var newOutput = {title: childSnap.val().title, content: testArray, date: childSnap.val().date, author: childSnap.val().author};
-					console.log("NEW OUTPUPT  ",output);
+					//console.log("NEW OUTPUPT  ",output);
 					res.render('post', output);
 
 					// Incrementing the view counter by 1 as someone views the post.
 					childPostRef.child('viewed').once('value',function(childSnap){
-						console.log("THE VALUE OF VIEWED IS ",childSnap.val());
+						//console.log("THE VALUE OF VIEWED IS ",childSnap.val());
 						var view = childSnap.val() + 1;
 						childPostRef.update({viewed: view});
-						console.log("THE VIEWED VALUE HAS BEEN UPDATED TO ",view);
+						//console.log("THE VIEWED VALUE HAS BEEN UPDATED TO ",view);
 					});
 				}
 				else{
@@ -194,7 +201,7 @@ postsRouter.route('/allposts') // books route
 			postsRef.once('value',function(snap){
 				// printing the data in the console retrieved from the Firebase
 				//console.log(snap.val());
-				res.json(snap.val());
+				res.send("Web Page not available");
 			},function(err){
 				// printing the error in Firebase
 				console.log('Error!!!');
@@ -212,8 +219,6 @@ app.get('/', function(request, response){
 	//response.render('index');
 	
 	var query = request.query.post;
-	
-
 
 	if(!isEmpty(query)){
 		console.log("IN THE IF CASE OF OLDER QUERIES");
@@ -241,63 +246,83 @@ app.get('/', function(request, response){
 			}
 		}
 		
-		postsRef.orderByChild('asc').startAt(startFirebase).limitToFirst(endFirebase).once('value',function(snap){
-			var jsonContent = snapshotToArray(snap);
+		if (query == "older"){
+			//postsRef.orderByChild('asc').startAt(startFirebase).limitToFirst(endFirebase).once('value',function(snap){
+			postsRef.orderByKey().endAt(lastKey).limitToLast(4).once('value',function(snap){
+				var jsonContent = snapshotToArray(snap);
 
-			console.log("ALL THE POSTS ARE ",snap.val());
-			var jsonLength = jsonContent.length;
-			var output = {posts: [],newer: newer, older: older, sidebar: []};
-			
-			for(var i = 0; i < jsonLength; i ++){
-				console.log("IN THE FOR LOOP ");
-				output.posts.push({title: jsonContent[i].title, preview: jsonContent[i].preview, date: jsonContent[i].date, name: jsonContent[i].name, author: jsonContent[i].author, image: jsonContent[i].image});
-			}
-			postsRef.orderByChild('viewed').limitToLast(3).once('value', function(childSnap){
-				var content = snapshotToArray(childSnap);
-				var len = content.length;
-				for(var j = len-1; j >= 0; j--){
-					output.sidebar.push({title: content[j].title, name: content[j].name});
+				console.log("ALL THE POSTS ARE ",snap.val());
+				var jsonLength = jsonContent.length;
+				var output = {posts: [],newer: newer, older: older, sidebar: []};
+				
+				var temp = 3
+				if (jsonLength == 4){
+					temp = 2;
 				}
-				console.log("THE OUTPUT RENDERED IS ",output);	
-				response.render('index',output);
+				else if(jsonLength == 3){
+					temp = 2;
+				}
+				else if(jsonLength == 2){
+					temp = 1;
+				}
+				else{
+					temp = 0;
+				}
+				//for(var i = 0; i < jsonLength; i ++){
+				for(var i = temp; i >= 0; i --){
+					console.log("IN THE FOR LOOP ");
+					output.posts.push({title: jsonContent[i].title, preview: jsonContent[i].preview, date: jsonContent[i].date, name: jsonContent[i].name, author: jsonContent[i].author, image: jsonContent[i].image, key: jsonContent[i].key});
+				}
+				startKey = prestart;
+				prestart = jsonContent[temp + 1];
+				lastKey = jsonContent[temp].key;
+				postsRef.orderByChild('viewed').limitToLast(3).once('value', function(childSnap){
+					var content = snapshotToArray(childSnap);
+					var len = content.length;
+					for(var j = len-1; j >= 0; j--){
+						output.sidebar.push({title: content[j].title, name: content[j].name, key: content[j].key});
+					}
+					console.log("THE OUTPUT RENDERED IS ",output);	
+					response.render('index',output);
+				});
+			},function(err){
+				console.log(err);
+				response.status(err);
 			});
-			
-			//response.render('index', {content: jsonContent[4],date: jsonContent[1] ,heading: jsonContent[2], title: jsonContent[3]});
-			
-			
-
-		},function(err){
-			console.log(err);
-			response.status(err);
-		});
+		}
 	}
 	else{
 		var newer = 'page-item disabled';
 		var older = 'page-item';
 
 		// passing all the values in the home page
-		console.log("in the ELSE CASE")
+		console.log("in the ELSE CASE OF / PATH ")
 		//postsRef.limitToFirst(3).once('value',function(snap){
 		// order by child will order the results by the "asc" key. 
-		postsRef.orderByChild('asc').startAt(startFirebase).limitToFirst(endFirebase).once('value',function(snap){
+		postsRef.orderByKey().limitToLast(4).once('value',function(snap){
 			// printing the data in the console retrieved from the Firebase
 			console.log("ORIGINAL DATA FROM FIREBASE");
-			console.log(snap.val());
+			//console.log(snap.val());
 			var jsonContent = snapshotToArray(snap);
 
-			console.log("ALL THE POSTS ARE ",snap.val());
+			//console.log("ALL THE POSTS ARE ",snap.val());
 			var length = jsonContent.length;
 			var output = {posts: [], newer: newer,older: older, sidebar: []};
-			for(var i = 0; i < length; i ++){
+			//for(var i = 0; i < length; i ++){
+			for(var i = length-1; i > 0; i --){
 				console.log("IN THE FOR LOOP ");
-				output.posts.push({title: jsonContent[i].title, preview: jsonContent[i].preview, date: jsonContent[i].date, name: jsonContent[i].name, author: jsonContent[i].author, image: jsonContent[i].image});
+				output.posts.push({title: jsonContent[i].title, preview: jsonContent[i].preview, date: jsonContent[i].date, name: jsonContent[i].name, author: jsonContent[i].author, image: jsonContent[i].image, key: jsonContent[i].key, key: jsonContent[i].key});
+				console.log("the title is ---  ",jsonContent[i].title);
 			}
+			lastKey = jsonContent[0].key;
+			prestart = jsonContent[length-1].key;
+			console.log("THE LAST KEY IS ====== ",lastKey);
 
 			postsRef.orderByChild('viewed').limitToLast(3).once('value', function(childSnap){
 				var content = snapshotToArray(childSnap);
 				var len = content.length;
 				for(var j = len-1; j >= 0; j--){
-					output.sidebar.push({title: content[j].title, name: content[j].name});
+					output.sidebar.push({title: content[j].title, name: content[j].name, key: content[j].key});
 				}
 				console.log("THE OUTPUT RENDERED IS ",output);	
 				response.render('index',output);
