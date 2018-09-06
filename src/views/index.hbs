@@ -64,7 +64,7 @@
             <div class="card-body">
               <h2 class="card-title">{{title}}</h2>
               <p class="card-text">{{preview}}</p>
-              <a href="/allposts?post={{key}}" class="btn btn-primary">Read More &rarr;</a>
+              <a href="/viewpost?post={{key}}" class="btn btn-primary">Read More &rarr;</a>
             </div>
             <div class="card-footer text-muted">
               Posted on {{date}} by
@@ -103,8 +103,11 @@
 
           <!-- Pagination -->
           <ul class="pagination justify-content-center mb-4">
+            <li class="{{newer}}">
+              <a class="page-link" href="?post=newer">&larr; Newer</a>
+            </li>
             <li class="{{older}}">
-              <a class="page-link" href="?post=older">&larr; Older</a>
+              <a class="page-link" href="?post=older"> Older &rarr;</a>
             </li>
           <!-- This is commented for sometime. unless the pagination issue is fixed
             <li class="{{newer}}">

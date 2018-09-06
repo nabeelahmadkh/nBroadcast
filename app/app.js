@@ -47,6 +47,7 @@ app.use(express.static('src/views/vendor/bootstrap/js'));
 app.use(express.static('src/views/vendor/jquery'));
 app.get('/search', router);
 app.get('/category', router);
+app.get('/viewpost', router);
 app.get('/', router);
 
 // Initializing Handelbars
@@ -60,29 +61,13 @@ app.listen(port, function(err){
 	console.log("server running on port"+port);
 });
 
-// Create a Router 
-var postsRouter = express.Router();
 
-////////////////////////////////////////////////////////////////// 
-// HELPER FUNCTIONS///////////////////////////////////////////////
-// Function for checking wheather the object has a value or not.
-function contentJsonToArray(snapshot){
-	var returnArr = [];
-	var item = snapshot;
-	returnArr.push({para: item.para1}, {para: item.para2}, {para: item.para3});
-	return returnArr;
-};
-////////////////////////////////////////////////////////////////// 
- 
-
-// This function will run on starting, 
-// will count the number of posts on Firebase, 
-// and display there Key 
+// This function will run on starting,
+// will count the number of keys on Firebase, 
+// and export the number of keys and value of key in app package
 postsRef.on('value',function(snap){
-	var jsonContent = helper.snapshotToArray(snap);
-	totalLength = jsonContent.length;
-	console.log("TOTAL LENGTH IS ",totalLength);
+	var keys = Object.keys(snap.val());
+	totalLength = keys.length;
+	exports.numberOfPosts = totalLength;
+	exports.keys = keys;
 });
-
-
-

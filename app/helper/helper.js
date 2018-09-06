@@ -44,3 +44,22 @@ exports.snapshotToArray = function snapshotToArray(snapshot) {
 	});
     return returnArr;
 };
+
+// Creating Content for the Article from Snapshot
+exports.contentJsonToArray = function contentJsonToArray(snapshot){
+	var returnArr = [];
+	var item = snapshot;
+	returnArr.push({para: item.para1}, {para: item.para2}, {para: item.para3});
+	return returnArr;
+};
+
+// Converting Firebase Snapshot to array
+exports.snapshotToKeysArray = function snapshotToKeysArray(snapshot) {
+    var returnArr = [];
+    snapshot.forEach(function(childSnapshot) {
+        var item = childSnapshot.val();
+        returnArr.push(item.key);
+        //console.log("item added ", item.key, item);
+	});
+    return returnArr;
+};

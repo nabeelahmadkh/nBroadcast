@@ -17,7 +17,7 @@ gulp.task('default', function(){
 
 gulp.task('adddata', function(){
     nodemon({
-        script: 'AddData.js',
+        script: 'app/AddData.js',
         ext: 'js',
         env: {
             PORT:3000
