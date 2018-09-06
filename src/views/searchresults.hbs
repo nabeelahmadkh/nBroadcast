@@ -40,9 +40,6 @@
             <li class="nav-item">
               <a class="nav-link" href="#">Posts</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Contact</a>
-            </li>
           </ul>
         </div>
       </div>
@@ -134,9 +131,13 @@
 
           <!-- Side Widget -->
           <div class="card my-4">
-            <h5 class="card-header">Side Widget</h5>
+            <h5 class="card-header">Popular Posts</h5>
             <div class="card-body">
-              You can put anything you want inside of these side widgets. They are easy to use, and feature the new Bootstrap 4 card containers!
+              <ul>
+              {{#each sidebar}}
+                <li><a href="/allposts?post={{key}}">{{title}}</a></li>
+              {{/each}}
+              </ul>
             </div>
           </div>
 
@@ -151,7 +152,7 @@
     <!-- Footer -->
     <footer class="py-5 bg-dark">
       <div class="container">
-        <p class="m-0 text-center text-white">Copyright &copy; NBroadcast 2017</p>
+        <p class="m-0 text-center text-white">Copyright &copy; NBroadcast 2018</p>
       </div>
       <!-- /.container -->
     </footer>
