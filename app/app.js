@@ -5,6 +5,7 @@
 // Loading Essential Libraries
 var express = require('express');
 var firebase = require('firebase');
+var bodyParser = require('body-parser');
 var router = require('./routes/routes');
 var helper = require('./helper/helper')
 
@@ -38,6 +39,11 @@ exports.postsRef = postsRef;
 var app = express();
 app.set('views', './src/views');
 
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+app.use(bodyParser.json());
+
 // Express.static is used for accessing the static files in the code(like css, javascript files).
 // This will make files inside "src/views/css" directory accesible by going to localhost:<port>/file-name.css
 // All these files can also be declared in a single directory by the name 'public'
@@ -49,6 +55,8 @@ app.get('/search', router);
 app.get('/category', router);
 app.get('/viewpost', router);
 app.get('/', router);
+app.get('/addnewdata', router)
+app.post('/addnewdata', router)
 
 // Initializing Handelbars
 var handlebars = require('express-handlebars');
