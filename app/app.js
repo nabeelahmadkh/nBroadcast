@@ -5,9 +5,14 @@
 // Loading Essential Libraries
 var express = require('express');
 var firebase = require('firebase');
+exports.firebase = firebase
 var bodyParser = require('body-parser');
 var router = require('./routes/routes');
 var helper = require('./helper/helper')
+var fs = require('fs');
+
+// Loading Configuration from the keys.json file 
+var obj = JSON.parse(fs.readFileSync('keys.json', 'utf8'));
 
 // Initializing Parameters for Posts Pagination
 var startFirebase = 1;
@@ -20,10 +25,10 @@ var prestart = ""
 
 // Firebase Configuration can be pulled from Firebase Console
 var config = {
-	apiKey: "AIzaSyC-d8dYJrCubsmFdYn2FKDcq1jhwA9PE3I",
-	authDomain: "blogproject-f3538.firebaseapp.com",
-	databaseURL: "https://blogproject-f3538.firebaseio.com",
-	storageBucket: "blogproject-f3538.appspot.com"
+	apiKey: obj.apiKey,
+	authDomain: obj.authDomain,
+	databaseURL: obj.databaseURL,
+	storageBucket: obj.storageBucket
 };
 
 // Initializing Firebase
@@ -57,6 +62,8 @@ app.get('/viewpost', router);
 app.get('/', router);
 app.get('/addnewdata', router)
 app.post('/addnewdata', router)
+app.get('/login', router)
+app.post('/login', router)
 
 // Initializing Handelbars
 var handlebars = require('express-handlebars');

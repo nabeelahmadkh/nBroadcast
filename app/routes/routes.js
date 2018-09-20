@@ -4,9 +4,10 @@ var router = express.Router();
 // Importing Controller
 var search_controller = require('../controller/search');
 var category_controller = require('../controller/category');
-var homepage_controller = require('../controller/homepage')
-var viewpost_controller = require('../controller/viewpost') 
-var addnewpost_controller = require('../controller/addnewpost') 
+var homepage_controller = require('../controller/homepage');
+var viewpost_controller = require('../controller/viewpost');
+var addnewpost_controller = require('../controller/addnewpost');
+var login_controller = require('../controller/login');
 
 // Creating Routes, Add new Routes below
 router.get('/', homepage_controller.homepage);
@@ -15,6 +16,8 @@ router.get('/category', category_controller.category);
 router.get('/viewpost', viewpost_controller.viewpost);
 router.get('/addnewdata', addnewpost_controller.addnewpost);
 router.post('/addnewdata', addnewpost_controller.postaddnewpost);
+router.get('/login', login_controller.loginget);
+router.post('/login', login_controller.loginpost);
 
 // Exporting Router Module to be imported in app.js
 module.exports = router;

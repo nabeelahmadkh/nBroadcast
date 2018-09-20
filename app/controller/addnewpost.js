@@ -1,9 +1,21 @@
 var helper = require('../helper/helper')
 var app = require('../app')
+var authenticate = require('./auth')
 
 // Add New Post Controller get method
 exports.addnewpost = function(request, response){
-    response.render('addPosts');
+    console.log('authenticated user is ', authenticate.isAuthenticated(request, response))
+    // console.log("Request.url is ", request.url)
+    // console.log("session authenticated ", request.session)
+    if (authenticate.isAuthenticated(request, response)){
+        console.log("in the if case  ")
+        response.render('addPosts');
+    }
+    else{
+        console.log("in the else case ")
+        response.render('login');
+    }
+    //response.render('addPosts');
 },function(err){
     console.log("THE ERROR IS ",err);
 }
