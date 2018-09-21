@@ -76,7 +76,6 @@ app.listen(port, function(err){
 	console.log("server running on port"+port);
 });
 
-
 // This function will run on starting,
 // will count the number of keys on Firebase, 
 // and export the number of keys and value of key in app package
