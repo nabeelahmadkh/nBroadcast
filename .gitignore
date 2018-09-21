@@ -60,4 +60,3 @@ typings/
 # for DS_Store
 **/.DS_Store
 .DS_Store
-keys.json
