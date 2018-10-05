@@ -1,6 +1,7 @@
 var helper = require('../helper/helper')
 var app = require('../app')
 var authenticate = require('./auth')
+var sidebar = require('./sidebar')
 
 // Add New Post Controller get method
 exports.addnewpost = function(request, response){
@@ -9,11 +10,19 @@ exports.addnewpost = function(request, response){
     // console.log("session authenticated ", request.session)
     if (authenticate.isAuthenticated(request, response)){
         console.log("in the if case  ")
-        response.render('addPosts');
+        // var user = app.firebase.auth().currentUser;
+        var user = app.currentUser
+        var output = {admin: user, sidebar: []}
+        console.log("in the if case  CHECK 2", output)
+        sidebar.mostVisitedPosts(output)
+        output = sidebar.output
+        console.log("in the if case  CHECK 6", output)
+        response.render('addPosts', output);
     }
     else{
         console.log("in the else case ")
-        response.render('login');
+        var output = {sidebar: []}
+        response.redirect('/admin');
     }
     //response.render('addPosts');
 },function(err){

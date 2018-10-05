@@ -13,3 +13,12 @@ body {
     padding-top: 56px;
   }
 }
+
+footer{
+  bottom: 0;
+  width: 100%;
+}
+
+.fullsizebody{
+  min-height: 100%;
+}

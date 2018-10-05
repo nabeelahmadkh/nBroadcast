@@ -26,10 +26,11 @@ exports.searchquery = function searchquery(snapshot, searchQuery){
 	// If the tag matches the search term then it will add the post to the return object 
 	var returnArr = [];
 	snapshot.forEach(function(childSnapshot){
-		var item = childSnapshot.val();
+        var item = childSnapshot.val();
+        var key = childSnapshot.key;
 		var mainStr = item.tags;
 		if(mainStr.indexOf(searchQuery) > -1) {
-			returnArr.push({content: item.content, date: item.date, title: item.title, preview: item.preview, author: item.author, name: item.name, image: item.image1});
+			returnArr.push({content: item.content, date: item.date, title: item.title, preview: item.preview, author: item.author, name: item.name, image: item.image1, key: key});
 		}
 	});
 	return returnArr;
@@ -40,7 +41,8 @@ exports.snapshotToArray = function snapshotToArray(snapshot) {
     var returnArr = [];
     snapshot.forEach(function(childSnapshot) {
         var item = childSnapshot.val();
-		returnArr.push({content: item.content, date: item.date, title: item.title, preview: item.preview, author: item.author, name: item.name, image: item.image1, key: item.key});
+        var key = childSnapshot.key;
+		returnArr.push({content: item.content, date: item.date, title: item.title, preview: item.preview, author: item.author, name: item.name, image: item.image1, key: key});
 	});
     return returnArr;
 };

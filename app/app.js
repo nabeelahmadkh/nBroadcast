@@ -62,8 +62,13 @@ app.get('/viewpost', router);
 app.get('/', router);
 app.get('/addnewdata', router)
 app.post('/addnewdata', router)
+app.get('/admin', router)
+app.post('/admin', router)
+app.get('/logout', router)
+app.get('/forgotpassword', router)
+app.post('/forgotpassword', router)
+app.get('/about', router)
 app.get('/login', router)
-app.post('/login', router)
 
 // Initializing Handelbars
 var handlebars = require('express-handlebars');
@@ -85,3 +90,15 @@ postsRef.on('value',function(snap){
 	exports.numberOfPosts = totalLength;
 	exports.keys = keys;
 });
+
+
+firebase.auth().onAuthStateChanged(firebaseUser => {
+    if(firebaseUser){
+        console.log('firebase user is ', firebaseUser.email)
+		var currentUserID = firebaseUser.email
+		exports.currentUser = currentUserID
+    }
+    else{
+        console.log('not logged in')
+    }
+  })

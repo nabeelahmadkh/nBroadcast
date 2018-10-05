@@ -1,14 +1,162 @@
 <!DOCTYPE html>
-<html>
-<body>
+<html lang="en">
 
-<p><h2>Admin Login</h2></p>
+  <head>
 
-<form action="/login" method="POST" id="postform">
-  <input type="username" name="username" placeholder="Username"><br><br>
-  <input type="password" name="password" placeholder="Password"><br><br>
-  <input type="submit" value="Submit">
-</form>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-</body>
+    <title>NBroadcast</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="blog-home.css" rel="stylesheet">
+
+  </head>
+ 
+  <body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="/">NBroadcast.xyz</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/about">About</a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="/login">Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/admin">Admin<span class="sr-only">(current)</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- Page Content -->
+    <div class="container">
+      
+
+      <div class="row">
+      <br><br><br>  
+
+        <!-- Blog Entries Column -->
+        <div class="col-md-8">
+
+          <div class="shadow-none p-3 mb-5 bg-light rounded" style="margin-top: 25px">
+          
+            <h1 class="my-4">
+              &nbsp; Login
+            </h1>
+
+            <!-- Login Page -->
+              <div class="col-md-6">
+                Functionality in Development.
+              </div>
+
+          </div>
+          {{message}}
+
+        </div>
+
+        <!-- Sidebar Widgets Column -->
+        <div class="col-md-4">
+
+          <!-- Search Widget -->
+          <form action="/search" method="get">
+            <div class="card my-4">
+              <h5 class="card-header">Search</h5>
+              <div class="card-body">
+                <div class="input-group">
+                  <input type="text" class="form-control" placeholder="Search for..." name="searchquery">
+                  <span class="input-group-btn">
+                    <button class="btn btn-secondary" type="submit" value="Submit">Go!</button>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </form>
+
+          <!-- Categories Widget -->
+          <div class="card my-4">
+            <h5 class="card-header">Categories</h5>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-lg-6">
+                  <ul class="list-unstyled mb-0">
+                    <li>
+                      <a href="/category?category=software">Soft. Engg.</a>
+                    </li>
+                    <li>
+                      <a href="/category?category=microsoftit">Microsoft IT</a>
+                    </li>
+                    <li>
+                      <a href="/category?category=sam">SAM</a>
+                    </li>
+                  </ul>
+                </div>
+                <div class="col-lg-6">
+                  <ul class="list-unstyled mb-0">
+                    <li>
+                      <a href="/category?category=hardware">Comp. Hard.</a>
+                    </li>
+                    <li>
+                      <a href="/category?category=networking">Networking</a>
+                    </li>
+                    <li>
+                      <a href="/category?category=tutorial">Tutorials</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Side Widget -->
+          <div class="card my-4">
+            <h5 class="card-header">Popular Posts</h5>
+            <div class="card-body">
+              <ul>
+              {{#each sidebar}}
+                <li><a href="/allposts?post={{key}}">{{title}}</a></li>
+              {{/each}}
+              </ul>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+      <!-- /.row -->
+
+    </div>
+    <!-- /.container -->
+
+    <!-- Footer -->
+    <footer class="py-5 bg-dark fixed-bottom">
+      <div class="container">
+        <p class="m-0 text-center text-white">Copyright &copy; NBroadcast 2018</p>
+      </div>
+      <!-- /.container -->
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  </body>
+
 </html>

@@ -11,7 +11,7 @@ exports.category = function(request, response){
 			var output = {posts: [], sidebar: []};
 			for(var i = 0; i < length; i ++){
 				console.log("IN THE FOR LOOP ");
-				output.posts.push({title: jsonContent[i].title, preview: jsonContent[i].preview, date: jsonContent[i].date, name: jsonContent[i].name, author: jsonContent[i].author});
+				output.posts.push({title: jsonContent[i].title, preview: jsonContent[i].preview, date: jsonContent[i].date, name: jsonContent[i].name, author: jsonContent[i].author, key: jsonContent[i].key});
 			}
 			if (length != 0){
 				query = query[0].toUpperCase() + query.slice(1);

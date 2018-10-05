@@ -35,7 +35,7 @@ exports.homepage = function(request, response){
         var keys = Object.keys(snap.val());
 		var jsonContent = helper.snapshotToArray(snap);
 		var length = jsonContent.length;
-		var output = {posts: [], sidebar: []};
+        var output = {posts: [], sidebar: []};
 		
 		for(var i = length-1; i >= 0; i --){
             output.posts.push({title: jsonContent[i].title, preview: jsonContent[i].preview, date: jsonContent[i].date, name: jsonContent[i].name, author: jsonContent[i].author, image: jsonContent[i].image, key: jsonContent[i].key, key: keys[i]});

@@ -1,20 +1,28 @@
 var helper = require('../helper/helper')
 var app = require('../app')
 var authenticate = require('./auth')
-var sidebar = require('./sidebar')
 
-exports.loginget = function(request, response){
+
+exports.adminget = function(request, response){
     console.log("in admin login ")
-    var output = {sidebar: []}
-    sidebar.mostVisitedPosts(output)
-    output = sidebar.output
-    response.render('login', output);
+    
+    app.postsRef.orderByChild('viewed').limitToLast(3).once('value', function(childSnap){
+        var content = helper.snapshotToArray(childSnap);
+        var len = content.length;
+
+        // Adding Popular Posts
+        var output = {sidebar: []};
+        for(var j = len-1; j >= 0; j--){
+            output.sidebar.push({title: content[j].title, name: content[j].name, key: content[j].key});
+        }
+        response.render('admin', output);
+    });
 },function(err){
     console.log("THE ERROR IS ",err);
 };
 
 
-exports.loginpost = function(request, response){
+exports.adminpost = function(request, response){
     app.firebase.auth().signInWithEmailAndPassword(request.body.username, request.body.password)
         .then(function(){
             // Authentication Successful
