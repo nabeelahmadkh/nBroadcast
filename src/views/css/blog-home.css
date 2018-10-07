@@ -22,3 +22,11 @@ footer{
 .fullsizebody{
   min-height: 100%;
 }
+
+.pre-formatting{
+  background-color: #fafaff;
+}
+
+.prettyprint ol.linenums > li {
+  list-style-type: decimal;
+}
