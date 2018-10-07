@@ -1,41 +1,58 @@
 var helper = require('../helper/helper')
 var app = require('../app')
-var start = 1
+var end = app.numberOfPosts - 1
 
 // HomePage Controller
 exports.homepage = function(request, response){
-    var pageLength = 2;
+    var pageLength = 3;
     var query = request.query.post;
-    var key = app.keys[0]
+    var key = app.keys[app.numberOfPosts - 1]
+    if (isNaN(end)){
+        end = app.numberOfPosts - 1
+    }
 
     if (!helper.isEmpty(query)){
         if (query == "older"){
-            if ((start + pageLength) > app.numberOfPosts){
-                key = app.keys[start-1];
+            if ((end - pageLength) >= 0){
+                key = app.keys[end-pageLength]
+                end -= pageLength
             }
             else{
-                start += pageLength;
-                key = app.keys[start-1];
+                key = app.keys[0]
+                end = 0
             }
         }
         if (query == "newer"){
-            if (start == 1){
-                key = app.keys[start-1];
+            if ((end + pageLength) <= (app.numberOfPosts-1)){
+                key = app.keys[end + pageLength];
+                end += pageLength;
             }
             else{
-                start -= pageLength;
-                key = app.keys[start-1];
+                end = app.numberOfPosts-1;
+                key = app.keys[end];
             }
         }
     }
-    console.log("start and key ", start, key)
-    console.log("keys ", app.keys)
+    console.log("start and key ", end, key)
+    // console.log("keys ", app.keys)
     
-    app.postsRef.orderByKey().limitToFirst(pageLength).startAt(key).once('value',function(snap){
+    app.postsRef.orderByKey().limitToLast(pageLength).endAt(key).once('value',function(snap){
         var keys = Object.keys(snap.val());
 		var jsonContent = helper.snapshotToArray(snap);
 		var length = jsonContent.length;
-        var output = {posts: [], sidebar: []};
+        var output = {posts: [], sidebar: [], newer: "", older: ""};
+        if (end == app.numberOfPosts-1){
+            output.newer = "page-item disabled";
+            output.older = "page-item"
+        }
+        else if (end == 0){
+            output.newer = "page-item";
+            output.older = "page-item disabled"
+        }
+        else{
+            output.newer = "page-item";
+            output.older = "page-item"
+        }
 		
 		for(var i = length-1; i >= 0; i --){
             output.posts.push({title: jsonContent[i].title, preview: jsonContent[i].preview, date: jsonContent[i].date, name: jsonContent[i].name, author: jsonContent[i].author, image: jsonContent[i].image, key: jsonContent[i].key, key: keys[i]});
