@@ -1,6 +1,7 @@
 var helper = require('../helper/helper')
 var app = require('../app')
 var authenticate = require('./auth')
+var sidebar = require('./sidebar')
 
 
 exports.adminget = function(request, response){
@@ -33,10 +34,13 @@ exports.adminpost = function(request, response){
             // Handle Errors here.
             var errorCode = error.code;
             var errorMessage = error.message;
-            // ...
+            
+            var output = {sidebar: [], message: errorCode}
+            output = sidebar.mostVisitedPosts(output)
+            output = sidebar.output
             console.log("error code is ", errorCode)
             console.log("error message is ", errorMessage)
-            response.render('admin');
+            response.render('admin', output);
         }
     );
 
