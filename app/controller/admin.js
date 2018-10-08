@@ -2,22 +2,19 @@ var helper = require('../helper/helper')
 var app = require('../app')
 var authenticate = require('./auth')
 var sidebar = require('./sidebar')
+var postByDate = require('./postByDate')
 
 
 exports.adminget = function(request, response){
     console.log("in admin login ")
+    var output = {sidebar: [], postByDate: []}
+	sidebar.mostVisitedPosts(output)
+	output = sidebar.output
+	
+	postByDate.allPostsByDate(output)
+    output = postByDate.output
     
-    app.postsRef.orderByChild('viewed').limitToLast(3).once('value', function(childSnap){
-        var content = helper.snapshotToArray(childSnap);
-        var len = content.length;
-
-        // Adding Popular Posts
-        var output = {sidebar: []};
-        for(var j = len-1; j >= 0; j--){
-            output.sidebar.push({title: content[j].title, name: content[j].name, key: content[j].key});
-        }
-        response.render('admin', output);
-    });
+    response.render('admin', output);
 },function(err){
     console.log("THE ERROR IS ",err);
 };
@@ -38,6 +35,10 @@ exports.adminpost = function(request, response){
             var output = {sidebar: [], message: errorCode}
             output = sidebar.mostVisitedPosts(output)
             output = sidebar.output
+
+            postByDate.allPostsByDate(output)
+            output = postByDate.output
+
             console.log("error code is ", errorCode)
             console.log("error message is ", errorMessage)
             response.render('admin', output);

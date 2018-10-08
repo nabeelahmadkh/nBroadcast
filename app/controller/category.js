@@ -1,5 +1,7 @@
 var helper = require('../helper/helper')
 var app = require('../app')
+var sidebar = require('./sidebar')
+var postByDate = require('./postByDate')
 
 // Category Controller
 exports.category = function(request, response){
@@ -8,7 +10,7 @@ exports.category = function(request, response){
 		app.postsRef.orderByChild('category').equalTo(query).once('value',function(snap){
 			var jsonContent = helper.snapshotToArray(snap);
 			var length = jsonContent.length
-			var output = {posts: [], sidebar: []};
+			var output = {posts: [], sidebar: [], postByDate: []};
 			for(var i = 0; i < length; i ++){
 				console.log("IN THE FOR LOOP ");
 				output.posts.push({title: jsonContent[i].title, preview: jsonContent[i].preview, date: jsonContent[i].date, name: jsonContent[i].name, author: jsonContent[i].author, key: jsonContent[i].key});
@@ -21,14 +23,12 @@ exports.category = function(request, response){
 				output.category = "No result";
 			}
 
-			app.postsRef.orderByChild('viewed').limitToLast(3).once('value', function(childSnap){
-				var content = helper.snapshotToArray(childSnap);
-				var len = content.length;
-				for(var j = len-1; j >= 0; j--){
-					output.sidebar.push({title: content[j].title, name: content[j].name, key: content[j].key});
-				}
-				response.render('categories', output);
-			});
+			sidebar.mostVisitedPosts(output);
+			output = sidebar.output
+			postByDate.allPostsByDate(output)
+			output = postByDate.output
+
+			response.render('categories', output);
 		});
 	}else{
 		app.postsRef.limitToFirst(10).once('value',function(snap){

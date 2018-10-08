@@ -39,9 +39,6 @@
             <li class="nav-item">
               <a class="nav-link" href="/login">Login</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/admin">Admin</a>
-            </li>
           </ul>
         </div>
       </div>
@@ -277,6 +274,34 @@
             </div>
           </div>
 
+          <!-- Side Widget -->
+          <div class="card my-4">
+            <h5 class="card-header">All Posts by Date</h5>
+            <div class="card-body">
+              <ul>
+                {{#each postByDate}}
+                <li>
+                  <a href="javascript:void(0);" onclick="display_hidden_month({{year}});">{{year}}</a>
+                  <ul>
+                    {{#each month}}
+                    <li id="monthbydate{{../year}}" style="display:none;">
+                      <a href="javascript:void(0);" onclick="display_hidden_post('{{../year}}{{name}}')">{{this.name}}</a>
+                      <ul id="postbydate{{../year}}{{name}}" style="display:none;">
+                        {{#each post}}
+                        <li>
+                          <a href="/viewpost?post={{this.key}}">{{this.name}}</a>
+                        </li>
+                        {{/each}}
+                      </ul>
+                    </li>
+                    {{/each}}
+                  </ul>
+                </li>
+                {{/each}}
+              </ul>
+            </div>
+          </div>
+
         </div>
 
       </div>
@@ -298,6 +323,28 @@
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script> --}}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
+    <script>
+      function display_hidden_month(year)
+      {
+          if (document.getElementById("monthbydate"+year).style.display == "block"){
+            document.getElementById("monthbydate"+year).style.display = "none"
+          }
+          else{
+            document.getElementById("monthbydate"+year).style.display = "block"
+          }
+      }
+    </script>
+    <script>
+      function display_hidden_post(yearMonth)
+      {
+          if (document.getElementById("postbydate"+yearMonth).style.display == "block"){
+            document.getElementById("postbydate"+yearMonth).style.display = "none"
+          }
+          else{
+            document.getElementById("postbydate"+yearMonth).style.display = "block"
+          }
+      }
+    </script>
 
   </body>
 

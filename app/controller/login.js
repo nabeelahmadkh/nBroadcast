@@ -2,12 +2,17 @@ var helper = require('../helper/helper')
 var app = require('../app')
 var authenticate = require('./auth')
 var sidebar = require('./sidebar')
+var postByDate = require('./postByDate')
 
 exports.loginget = function(request, response){
     console.log("in admin login ")
-    var output = {sidebar: []}
+    var output = {sidebar: [], postByDate: []}
     sidebar.mostVisitedPosts(output)
     output = sidebar.output
+
+    postByDate.allPostsByDate(output)
+    output = postByDate.output
+    
     response.render('login', output);
 },function(err){
     console.log("THE ERROR IS ",err);

@@ -1,5 +1,7 @@
 var helper = require('../helper/helper')
 var app = require('../app')
+var sidebar = require('./sidebar')
+var postByDate = require('./postByDate')
 var end = app.numberOfPosts - 1
 
 // HomePage Controller
@@ -40,18 +42,18 @@ exports.homepage = function(request, response){
         var keys = Object.keys(snap.val());
 		var jsonContent = helper.snapshotToArray(snap);
 		var length = jsonContent.length;
-        var output = {posts: [], sidebar: [], newer: "", older: ""};
+        var output = {posts: [], sidebar: [], newer: "", older: "", postByDate: []};
         if (end == app.numberOfPosts-1){
             output.newer = "page-item disabled";
             output.older = "page-item"
         }
-        else if (end == 0){
+        else if (end < pageLength){
             output.newer = "page-item";
-            output.older = "page-item disabled"
+            output.older = "page-item disabled";
         }
         else{
             output.newer = "page-item";
-            output.older = "page-item"
+            output.older = "page-item";
         }
 		
 		for(var i = length-1; i >= 0; i --){
@@ -61,14 +63,15 @@ exports.homepage = function(request, response){
 		lastKey = jsonContent[0].key;
 		prestart = jsonContent[length-1].key;
 
-		app.postsRef.orderByChild('viewed').limitToLast(3).once('value', function(childSnap){
-			var content = helper.snapshotToArray(childSnap);
-			var len = content.length;
-			for(var j = len-1; j >= 0; j--){
-				output.sidebar.push({title: content[j].title, name: content[j].name, key: content[j].key});
-			}
-			response.render('index',output);
-		});
+        sidebar.mostVisitedPosts(output);
+        output = sidebar.output;
+
+        postByDate.allPostsByDate(output);
+        output = postByDate.output;
+
+        console.log('OUPUT IS *** ', output)
+
+        response.render('index',output);
 	},function(err){
 		console.log('Error!!!');
 		console.log(err)
