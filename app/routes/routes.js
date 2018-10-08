@@ -12,6 +12,7 @@ var logout_controller = require('../controller/logout');
 var forgot_controller = require('../controller/forgotpassword')
 var about_controller = require('../controller/about');
 var login_controller = require('../controller/login');
+var sitemap_controller = require('../controller/sitemap');
 
 // Creating Routes, Add new Routes below
 router.get('/', homepage_controller.homepage);
@@ -27,6 +28,7 @@ router.get('/forgotpassword', forgot_controller.forgotpaswordget);
 router.post('/forgotpassword', forgot_controller.forgotpaswordpost);
 router.get('/about', about_controller.about);
 router.get('/login', login_controller.loginget);
+router.get('/sitemap', sitemap_controller.sitemap)
 
 // Exporting Router Module to be imported in app.js
 module.exports = router;

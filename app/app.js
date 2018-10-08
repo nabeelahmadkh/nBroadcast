@@ -69,6 +69,7 @@ app.get('/forgotpassword', router)
 app.post('/forgotpassword', router)
 app.get('/about', router)
 app.get('/login', router)
+app.get('/sitemap', router)
 
 // Initializing Handelbars
 var handlebars = require('express-handlebars');
