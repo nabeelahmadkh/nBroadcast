@@ -12,9 +12,12 @@
 
     <!-- Bootstrap core CSS -->
     <link href="bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" type="text/javascript"></script>
+
     <!-- Custom styles for this template -->
     <link href="blog-home.css" rel="stylesheet">
+    <link href="customcss.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" type="text/javascript"></script>
+    
 
   </head>
  
@@ -30,55 +33,70 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <a class="nav-link" href="/">Home
-              </a>
+              <a class="nav-link" href="/">Home</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="/about">About</a>
             </li>
-            {{#if user}}
-            <li class="nav-item">
-              <div class="dropdown">
-                <button class="nav-link btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:white">
-                  {{user}}
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  <a class="nav-link dropdown-item" href="/logout" style="color:black">LogOut</a>
-                </div>
-              </div>
-            </li>
-            {{else}}
-            <li class="nav-item">
+            <li class="nav-item active">
               <a class="nav-link" href="/login">Login</a>
             </li>
-            {{/if}}
           </ul>
         </div>
       </div>
     </nav>
-
     <!-- Page Content -->
     <div class="container">
+      
 
       <div class="row">
+      <br><br><br>  
 
         <!-- Blog Entries Column -->
         <div class="col-md-8">
 
-          <h1 class="my-4">{{title}}
-            <small>{{title2}}</small>
-          </h1>
+          <div class="shadow-none p-3 mb-5 bg-light rounded" style="margin-top: 25px">
+          
+            <h1 class="my-4">
+              &nbsp; SignUp
+            </h1>
 
-          <!-- Blog Post -->
-          <div class="card mb-4">
-            <div class="card-body">
-              {{{content}}}  
-            </div>
-            <div class="card-footer text-muted">
-              Posted on {{date}} by
-              <a href="#">{{author}}</a>
-            </div>
+            <!-- Login Page -->
+              <div class="col-md-6">
+                <form action="/signup" method="POST" id="postform">
+                    <div class="form-group">
+                      <input type="firstname" onchange="formValidation()" oninput="firstnameValidation()" id="firstname" class="form-control" placeholder="Firstname" name="firstname">
+                      <p id="firstnamealert" style="color:red;"></p>
+                    </div>
+                    <div class="form-group">
+                      <input type="lastname" onchange="formValidation()" oninput="lastnameValidation()" id="lastname" class="form-control" placeholder="Lastname" name="lastname">
+                      <p id="lastnamealert" style="color:red;"></p>
+                    </div>
+                    <div class="form-group">
+                      <input type="username" onchange="formValidation()" oninput="usernameValidation()" id="inputEmail" class="form-control" placeholder="Username" name="username">
+                      <p id="usernamealert" style="color:red;"></p>
+                    </div>
+                    <div class="form-group">
+                      <input type="password" onchange="formValidation()" oninput="passwordValidation()" class="form-control" id="inputPassword" placeholder="Password" name="password">
+                      <p id="passwordalert" style="color:red;"></p>
+                    </div>
+                    <div class="form-group">
+                      <input type="password" onchange="formValidation()" oninput="confirmpasswordValidation()" class="form-control" id="confirmPassword" placeholder="ConfirmPassword" name="confirmpassword">
+                      <p id="confirmpasswordalert" style="color:red;"></p>
+                    </div>
+                    <br>
+                    <button type="submit" id="signUpUser" class="btn btn-primary" value="Submit" disabled>SignUp</button>
+                </form>
+                
+                <br><br>
+
+                {{!-- <button class="loginBtn loginBtn--google">
+                  <a href="#" style="color:white"> SignUp with Google </a>
+                </button> --}}
+              </div>
+
           </div>
+          {{message}}
 
         </div>
 
@@ -194,7 +212,6 @@
     <!-- Bootstrap core JavaScript -->
     {{!-- <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script> --}}
-    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
     <script>
@@ -217,6 +234,79 @@
           else{
             document.getElementById("postbydate"+yearMonth).style.display = "block"
           }
+      }
+    </script>
+    <script>
+      function firstnameValidation(){
+        firstName = document.getElementById('firstname').value;
+        if (firstName.length == 0){
+          document.getElementById('firstnamealert').innerHTML = "FirstName cannot be empty";
+        }
+        else{
+          document.getElementById('firstnamealert').innerHTML = "";
+        }
+      }
+
+      function lastnameValidation(){
+        firstName = document.getElementById('lastname').value;
+        if (firstName.length == 0){
+          document.getElementById('lastnamealert').innerHTML = "LastName cannot be empty";
+        }
+        else{
+          document.getElementById('lastnamealert').innerHTML = "";
+        }
+      }
+
+      function usernameValidation(){
+        firstName = document.getElementById('inputEmail').value;
+        if (firstName.length == 0){
+          document.getElementById('usernamealert').innerHTML = "UserName cannot be empty";
+        }
+        else{
+          document.getElementById('usernamealert').innerHTML = "";
+        }
+      }
+
+      function passwordValidation(){
+        password = document.getElementById('inputPassword').value;
+        if (password.length < 8){
+          document.getElementById('passwordalert').innerHTML = "Password cannot be empty, should be at least 8 digit long";
+        }
+        else{
+          document.getElementById('passwordalert').innerHTML = "";
+        }
+      }
+
+      function confirmpasswordValidation(){
+        password1 = document.getElementById('inputPassword').value;
+        password2 = document.getElementById('confirmPassword').value;
+        if (password1 != password2){
+          document.getElementById('confirmpasswordalert').innerHTML = "Passwords not matching";
+        }
+        else{
+          document.getElementById('confirmpasswordalert').innerHTML = "";
+        }
+        firstnameValidation()
+        lastnameValidation()
+        usernameValidation()
+        passwordValidation()
+      }
+
+      function formValidation(){
+        //alert("Function called");
+        var test = "testing"
+        firstName = document.getElementById('firstname').value;
+        lastName = document.getElementById('lastname').value;
+        email = document.getElementById('inputEmail').value;
+        password = document.getElementById('inputPassword').value;
+        confirmPassword = document.getElementById('confirmPassword').value;
+        
+        if ((firstName.length != 0) && (lastName.length != 0) && (email.length != 0) && (password.length >= 8) && (confirmPassword.length >= 8) && (password == confirmPassword)){
+          document.getElementById('signUpUser').disabled = false
+        }
+        else{
+          document.getElementById('signUpUser').disabled = true
+        }
       }
     </script>
   </body>

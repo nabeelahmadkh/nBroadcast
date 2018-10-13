@@ -10,11 +10,17 @@ exports.category = function(request, response){
 		app.postsRef.orderByChild('category').equalTo(query).once('value',function(snap){
 			var jsonContent = helper.snapshotToArray(snap);
 			var length = jsonContent.length
-			var output = {posts: [], sidebar: [], postByDate: []};
+			var output = {posts: [], sidebar: [], postByDate: [], user: null};
 			for(var i = 0; i < length; i ++){
 				console.log("IN THE FOR LOOP ");
 				output.posts.push({title: jsonContent[i].title, preview: jsonContent[i].preview, date: jsonContent[i].date, name: jsonContent[i].name, author: jsonContent[i].author, key: jsonContent[i].key});
 			}
+
+			if (app.firebase.auth().currentUser){
+				console.log(' CURRENT ISRE IS IS ', app.firebase.auth().currentUser.displayName)
+				output.user = app.firebase.auth().currentUser.displayName;
+			}
+			
 			if (length != 0){
 				query = query[0].toUpperCase() + query.slice(1);
 				query += " posts"

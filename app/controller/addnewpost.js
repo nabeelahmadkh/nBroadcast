@@ -2,26 +2,37 @@ var helper = require('../helper/helper')
 var app = require('../app')
 var authenticate = require('./auth')
 var sidebar = require('./sidebar')
+var postByDate = require('./postByDate')
 
 // Add New Post Controller get method
 exports.addnewpost = function(request, response){
     console.log('authenticated user is ', authenticate.isAuthenticated(request, response))
     // console.log("Request.url is ", request.url)
     // console.log("session authenticated ", request.session)
-    if (authenticate.isAuthenticated(request, response)){
+    if (authenticate.isAuthenticated(request, response) && app.currentUser == 'nabeelahmadkh@gmail.com'){
         console.log("in the if case  ")
         // var user = app.firebase.auth().currentUser;
         var user = app.currentUser
-        var output = {admin: user, sidebar: []}
+        var output = {admin: user, sidebar: [], postByDate: []}
         console.log("in the if case  CHECK 2", output)
         sidebar.mostVisitedPosts(output)
         output = sidebar.output
+
+        postByDate.allPostsByDate(output)
+        output = postByDate.output
+
         console.log("in the if case  CHECK 6", output)
         response.render('addPosts', output);
     }
     else{
         console.log("in the else case ")
-        var output = {sidebar: []}
+        var output = {sidebar: [], postByDate: []}
+        sidebar.mostVisitedPosts(output)
+        output = sidebar.output
+
+        postByDate.allPostsByDate(output)
+        output = postByDate.output
+        
         response.redirect('/admin');
     }
     //response.render('addPosts');

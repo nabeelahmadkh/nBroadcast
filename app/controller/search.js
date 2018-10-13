@@ -12,7 +12,13 @@ exports.search_get = function(request, response){
 			var jsonContent = helper.searchquery(snap, query);
 			var length = jsonContent.length;
 			// var keys = snap.key;
-			var output = {posts: [], sidebar: [], postByDate: []};
+			var output = {posts: [], sidebar: [], postByDate: [], user: null};
+
+			if (app.firebase.auth().currentUser){
+				console.log(' CURRENT ISRE IS IS ', app.firebase.auth().currentUser.displayName)
+				output.user = app.firebase.auth().currentUser.displayName;
+			}
+			
 			console.log(' keys are ', jsonContent)
 			// console.log('lenth is ', length)
 			for(var i = length-1; i >= 0; i --){

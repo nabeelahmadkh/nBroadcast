@@ -12,12 +12,13 @@
   "dependencies": {
     "body-parser": "^1.18.2",
     "date-and-time": "^0.6.2",
-    "express": "^4.15.4",
+    "express": "^4.16.3",
     "express-handlebars": "^3.0.0",
     "firebase": "^4.6.2",
     "gulp": "^3.9.1",
     "gulp-nodemon": "^2.2.1",
     "path": "^0.12.7",
+    "popper.js": "^1.14.4",
     "read-xml": "^3.0.0",
     "xml": "^1.0.1",
     "xml2js": "^0.4.19"

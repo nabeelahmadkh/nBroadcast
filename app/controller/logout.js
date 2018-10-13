@@ -8,14 +8,14 @@ exports.logoutget = function(request, response){
     console.log("in admin logout ")
     app.firebase.auth().signOut()
         .then(function(){
-            var output = {message: 'User Successfully Logged Out', sidebar: [], postByDate: []}
-            sidebar.mostVisitedPosts(output)
-            output = sidebar.output
+            // var output = {message: 'User Successfully Logged Out', sidebar: [], postByDate: []}
+            // sidebar.mostVisitedPosts(output)
+            // output = sidebar.output
             
-            postByDate.allPostsByDate(output)
-            output = postByDate.output
+            // postByDate.allPostsByDate(output)
+            // output = postByDate.output
 
-            response.render('admin', output);
+            response.redirect('/');
         })
         .catch(function(err){
             var output = {message: err, sidebar: [], postByDate: []}
@@ -25,7 +25,7 @@ exports.logoutget = function(request, response){
             postByDate.allPostsByDate(output)
             output = postByDate.output
 
-            response.render('admin', output);
+            response.render('login', output);
         })
 },function(err){
     console.log("THE ERROR IS ",err);

@@ -11,7 +11,13 @@ exports.viewpost = function(req,res){
         childPostRef = app.postsRef.child(query)
         childPostRef.once('value',function(childSnap){
             if(!helper.isEmpty(childSnap.val())){
-                var output = {title: childSnap.val().title, content: childSnap.val().content, date: childSnap.val().date, author: childSnap.val().author, sidebar: [], postByDate: []};
+                var output = {title: childSnap.val().title, content: childSnap.val().content, date: childSnap.val().date, author: childSnap.val().author, sidebar: [], postByDate: [], user: null};
+
+                if (app.firebase.auth().currentUser){
+                    console.log(' CURRENT ISRE IS IS ', app.firebase.auth().currentUser.displayName)
+                    output.user = app.firebase.auth().currentUser.displayName;
+                }
+                
                 var testArray = helper.contentJsonToArray(output.content);
                 var newOutput = {title: childSnap.val().title, content: testArray, date: childSnap.val().date, author: childSnap.val().author};
 

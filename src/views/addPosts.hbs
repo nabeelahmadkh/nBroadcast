@@ -12,6 +12,7 @@
 
     <!-- Bootstrap core CSS -->
     <link href="bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" type="text/javascript"></script>
 
     <!-- Custom styles for this template -->
     <link href="blog-home.css" rel="stylesheet">
@@ -27,7 +28,7 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
+        <div class="collapse navbar-collapse text-center" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
               <a class="nav-link" href="/">Home
@@ -37,7 +38,14 @@
               <a class="nav-link" href="/about">About</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/login">Login</a>
+              <div class="dropdown">
+                <button class="nav-link btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:white">
+                  {{admin}}
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <a class="nav-link dropdown-item" href="/logout" style="color:black">LogOut</a>
+                </div>
+              </div>
             </li>
           </ul>
         </div>

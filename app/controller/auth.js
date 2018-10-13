@@ -5,7 +5,7 @@ module.exports = {
       var user = app.firebase.auth().currentUser;
       if (user !== null) {
         req.user = user;
-        // console.log("User is ", user)
+        console.log("User is ", user.email);
         return true
       } else {
         console.log("isAuthenticated Function");

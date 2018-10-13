@@ -28,7 +28,9 @@ var config = {
 	apiKey: obj.apiKey,
 	authDomain: obj.authDomain,
 	databaseURL: obj.databaseURL,
-	storageBucket: obj.storageBucket
+	storageBucket: obj.storageBucket,
+	messagingSenderId: obj.messagingSenderId,
+	projectId: obj.projectId
 };
 
 // Initializing Firebase
@@ -56,6 +58,8 @@ app.use(express.static('./src/views/css'));
 app.use(express.static('src/views/vendor/bootstrap/css'));
 app.use(express.static('src/views/vendor/bootstrap/js'));
 app.use(express.static('src/views/vendor/jquery'));
+app.use(express.static('src/views/vendor/'));
+// app.use(express.static(__dirname + '/src/views/vendor/customcss.css'));
 app.get('/search', router);
 app.get('/category', router);
 app.get('/viewpost', router);
@@ -69,7 +73,12 @@ app.get('/forgotpassword', router)
 app.post('/forgotpassword', router)
 app.get('/about', router)
 app.get('/login', router)
+app.post('/login', router)
 app.get('/sitemap', router)
+app.get('/signup', router)
+app.post('/signup', router)
+app.get('/loginwithgoogle', router)
+app.post('/loginwithgoogle', router)
 
 // Initializing Handelbars
 var handlebars = require('express-handlebars');
@@ -95,11 +104,11 @@ postsRef.on('value',function(snap){
 
 firebase.auth().onAuthStateChanged(firebaseUser => {
     if(firebaseUser){
-        console.log('firebase user is ', firebaseUser.email)
-		var currentUserID = firebaseUser.email
-		exports.currentUser = currentUserID
+        console.log('****** FIREBASE USER IS ****** ', firebaseUser.email);
+		var currentUserID = firebaseUser.email;
+		exports.currentUser = currentUserID;
     }
     else{
-        console.log('not logged in')
+        console.log('****** FIREBASE USER NOT LOGGED IN  ******');
     }
   })
