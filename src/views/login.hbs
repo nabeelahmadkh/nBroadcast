@@ -285,14 +285,12 @@
 
         var id_token = googleUser.getAuthResponse().id_token;
         
-        alert("ID Token is "+id_token);
-        var url = 'http://localhost:3000/loginwithgoogle'
+        var url = 'http://www.nbroadcast.xyz/loginwithgoogle'
         var form = $('<form action="' + url + '" method="post">' +
                       '<input type="text" name="token" value="' + id_token + '" />' +
                       '</form>');
         $('body').append(form);
         form.submit();
-
       }
 
       function isUserEqual(googleUser, firebaseUser) {
