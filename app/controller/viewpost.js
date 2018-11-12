@@ -11,7 +11,7 @@ exports.viewpost = function(req,res){
         childPostRef = app.postsRef.child(query)
         childPostRef.once('value',function(childSnap){
             if(!helper.isEmpty(childSnap.val())){
-                var output = {title: childSnap.val().title, content: childSnap.val().content, date: childSnap.val().date, author: childSnap.val().author, sidebar: [], postByDate: [], user: null};
+                var output = {title: childSnap.val().title, content: childSnap.val().content, date: childSnap.val().date, author: childSnap.val().author, sidebar: [], postByDate: [], user: null, tags: []};
 
                 if (app.firebase.auth().currentUser){
                     console.log(' CURRENT ISRE IS IS ', app.firebase.auth().currentUser.displayName)
@@ -26,6 +26,13 @@ exports.viewpost = function(req,res){
                     var view = childSnap.val() + 1;
                     childPostRef.update({viewed: view});
                 });
+
+                // Add tags to the output object 
+                console.log("\n TAGS ARE : ", childSnap.val().tags);
+                var tags = childSnap.val().tags.split(", ");
+                console.log("\n TAGS ARRAY IS ", tags);
+                output.tags = tags
+
 
                 sidebar.mostVisitedPosts(output)
                 output = sidebar.output

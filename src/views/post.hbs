@@ -75,6 +75,12 @@
               {{{content}}}  
             </div>
             <div class="card-footer text-muted">
+              Tags : 
+              {{#each tags}}
+                <a href="#" onclick="return false;">{{this}}, </a>
+              {{/each}}
+            </div>
+            <div class="card-footer text-muted">
               Posted on {{date}} by
               <a href="#">{{author}}</a>
             </div>
