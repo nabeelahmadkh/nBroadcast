@@ -58,8 +58,8 @@ exports.allPostsByDate = function(output){
             }
             
         });
-        console.log('\noutput is ', output.postByDate);
-        console.log('\nlast output is  ', output.postByDate[3].month)
+        // console.log('\noutput is ', output.postByDate);
+        // console.log('\nlast output is  ', output.postByDate[3].month)
         exports.output = output;
     });
 }
