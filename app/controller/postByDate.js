@@ -7,8 +7,7 @@ exports.allPostsByDate = function(output){
         snapshot.forEach(function(childSnap){
             var item = childSnap.val();
             var key = childSnap.key;
-            // var dateFormat = require('dateformat');
-            // thisPostDate = dateFormat(item.date, 'dddd, dd mmmm yyyy');
+            
             date = item.date.split(' ')
             year = date[3]
             month = date[2]
@@ -28,8 +27,8 @@ exports.allPostsByDate = function(output){
                         }
                     }
                     if (!monthFound){
-                        output.postByDate.month = []
-                        output.postByDate.month.push({
+                        // output.postByDate[i].month = []
+                        output.postByDate[i].month.push({
                             name: month,
                             post: [
                                     {
@@ -59,6 +58,8 @@ exports.allPostsByDate = function(output){
             }
             
         });
+        console.log('\noutput is ', output.postByDate);
+        console.log('\nlast output is  ', output.postByDate[3].month)
         exports.output = output;
     });
 }
