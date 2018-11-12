@@ -4,7 +4,6 @@ var authenticate = require('./auth')
 
 exports.allPostsByDate = function(output){
     app.postsRef.once('value', function(snapshot){
-
         snapshot.forEach(function(childSnap){
             var item = childSnap.val();
             var key = childSnap.key;

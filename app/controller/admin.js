@@ -38,7 +38,7 @@ exports.adminpost = function(request, response){
             var errorCode = error.code;
             var errorMessage = error.message;
             
-            var output = {sidebar: [], message: errorCode}
+            var output = {sidebar: [], message: errorCode, postByDate: []}
             output = sidebar.mostVisitedPosts(output)
             output = sidebar.output
 
@@ -52,7 +52,7 @@ exports.adminpost = function(request, response){
     }
     else{
         
-        var output = {sidebar: [], message: 'Wrong Username'}
+        var output = {sidebar: [], message: 'Wrong Username', postByDate: []}
         output = sidebar.mostVisitedPosts(output)
         output = sidebar.output
 
