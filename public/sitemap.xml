@@ -9,107 +9,112 @@
 
 <url>
   <loc>http://www.nbroadcast.xyz/</loc>
-  <lastmod>2018-10-07T20:55:28+00:00</lastmod>
+  <lastmod>2019-05-13T22:14:09+00:00</lastmod>
   <priority>1.00</priority>
 </url>
 <url>
   <loc>http://www.nbroadcast.xyz/about</loc>
-  <lastmod>2018-10-07T20:55:28+00:00</lastmod>
+  <lastmod>2019-05-13T22:14:09+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>http://www.nbroadcast.xyz/login</loc>
-  <lastmod>2018-10-07T20:55:28+00:00</lastmod>
+  <lastmod>2019-05-13T22:14:09+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>http://www.nbroadcast.xyz/admin</loc>
-  <lastmod>2018-10-07T20:55:28+00:00</lastmod>
+  <loc>http://www.nbroadcast.xyz/viewpost?post=-LeBKNHGA5WzQtSL47d6</loc>
+  <lastmod>2019-05-13T22:14:09+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>http://www.nbroadcast.xyz/viewpost?post=-LOC0vjtw16CGjjcMHRV</loc>
-  <lastmod>2018-10-07T20:55:28+00:00</lastmod>
+  <loc>http://www.nbroadcast.xyz/viewpost?post=-LR5dhUhFWfmTsfJjxwo</loc>
+  <lastmod>2019-05-13T22:14:09+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>http://www.nbroadcast.xyz/viewpost?post=-LO4Ia1eFudFruzKiPsh</loc>
-  <lastmod>2018-10-07T20:55:28+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>http://www.nbroadcast.xyz/viewpost?post=-L4IQehzpuzUdULDNinM</loc>
-  <lastmod>2018-10-07T20:55:28+00:00</lastmod>
+  <loc>http://www.nbroadcast.xyz/viewpost?post=-LOfiYi3dVfAiuWw_RSA</loc>
+  <lastmod>2019-05-13T22:14:09+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>http://www.nbroadcast.xyz/?post=newer</loc>
-  <lastmod>2018-10-07T20:55:28+00:00</lastmod>
+  <lastmod>2019-05-13T22:14:09+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>http://www.nbroadcast.xyz/?post=older</loc>
-  <lastmod>2018-10-07T20:55:28+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>http://www.nbroadcast.xyz/category?category=software</loc>
-  <lastmod>2018-10-07T20:55:28+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>http://www.nbroadcast.xyz/category?category=microsoftit</loc>
-  <lastmod>2018-10-07T20:55:28+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>http://www.nbroadcast.xyz/category?category=sam</loc>
-  <lastmod>2018-10-07T20:55:28+00:00</lastmod>
+  <lastmod>2019-05-13T22:14:09+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>http://www.nbroadcast.xyz/category?category=hardware</loc>
-  <lastmod>2018-10-07T20:55:28+00:00</lastmod>
+  <lastmod>2019-05-13T22:14:09+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>http://www.nbroadcast.xyz/category?category=networking</loc>
-  <lastmod>2018-10-07T20:55:28+00:00</lastmod>
+  <loc>http://www.nbroadcast.xyz/category?category=machinelearning</loc>
+  <lastmod>2019-05-13T22:14:09+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>http://www.nbroadcast.xyz/category?category=tutorial</loc>
-  <lastmod>2018-10-07T20:55:28+00:00</lastmod>
+  <loc>http://www.nbroadcast.xyz/category?category=problemsolving</loc>
+  <lastmod>2019-05-13T22:14:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://www.nbroadcast.xyz/category?category=softwareengineering</loc>
+  <lastmod>2019-05-13T22:14:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://www.nbroadcast.xyz/category?category=microsoftit</loc>
+  <lastmod>2019-05-13T22:14:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://www.nbroadcast.xyz/viewpost?post=-LOC0vjtw16CGjjcMHRV</loc>
+  <lastmod>2019-05-13T22:14:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://www.nbroadcast.xyz/viewpost?post=-LO4Ia1eFudFruzKiPsh</loc>
+  <lastmod>2019-05-13T22:14:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://www.nbroadcast.xyz/viewpost?post=-L4I5zA0TlsTyokExSAR</loc>
+  <lastmod>2019-05-13T22:14:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://www.nbroadcast.xyz/viewpost?post=-L4IQehzpuzUdULDNinM</loc>
+  <lastmod>2019-05-13T22:14:09+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>http://www.nbroadcast.xyz/viewpost?post=-L4I6ryJaJysu9z7W14d</loc>
-  <lastmod>2018-10-07T20:55:28+00:00</lastmod>
+  <lastmod>2019-05-13T22:14:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://www.nbroadcast.xyz/viewpost?post=-L4I7NcWPbN2mcnYAosr</loc>
+  <lastmod>2019-05-13T22:14:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://www.nbroadcast.xyz/viewpost?post=-L4IPUlfX97DtZZvcsof</loc>
+  <lastmod>2019-05-13T22:14:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://www.nbroadcast.xyz/viewpost?post=-L4IPo30buPNq8zGE0Ru</loc>
+  <lastmod>2019-05-13T22:14:09+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>http://www.nbroadcast.xyz/forgotpassword</loc>
-  <lastmod>2018-10-07T20:55:28+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>http://www.nbroadcast.xyz/viewpost?post=-L4IPo30buPNq8zGE0Ru</loc>
-  <lastmod>2018-10-07T20:55:28+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>http://www.nbroadcast.xyz/viewpost?post=-L4IPUlfX97DtZZvcsof</loc>
-  <lastmod>2018-10-07T20:55:28+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>http://www.nbroadcast.xyz/viewpost?post=-L4I7NcWPbN2mcnYAosr</loc>
-  <lastmod>2018-10-07T20:55:28+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>http://www.nbroadcast.xyz/viewpost?post=-L4I5zA0TlsTyokExSAR</loc>
-  <lastmod>2018-10-07T20:55:28+00:00</lastmod>
+  <lastmod>2019-05-13T22:14:09+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 
