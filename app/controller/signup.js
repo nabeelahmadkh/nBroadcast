@@ -23,7 +23,7 @@ exports.signupget = function(request, response){
         output = postByDate.output
         console.log("*** CHECK 2 *****")
         
-        response.render('signup', output);
+        response.render('signUp', output);
     }
 },function(err){
     console.log("THE ERROR IS ",err);
