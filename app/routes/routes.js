@@ -15,6 +15,7 @@ var login_controller = require('../controller/login');
 var sitemap_controller = require('../controller/sitemap');
 var signup_controller = require('../controller/signup');
 var loginwithgoogle_controller = require('../controller/loginwithgoogle');
+var addcomment_controller = require('../controller/addcomment');
 
 // Creating Routes, Add new Routes below
 router.get('/', homepage_controller.homepage);
@@ -36,6 +37,7 @@ router.get('/signup', signup_controller.signupget);
 router.post('/signup', signup_controller.signuppost);
 router.get('/loginwithgoogle', loginwithgoogle_controller.loginwithgoogleget);
 router.post('/loginwithgoogle', loginwithgoogle_controller.loginwithgooglepost);
+router.post('/addcomment', addcomment_controller.addcomment);
 
 
 // Exporting Router Module to be imported in app.js

@@ -6,7 +6,7 @@
 var express = require('express');
 var firebase = require('firebase');
 exports.firebase = firebase
-var bodyParser = require('body-parser');
+// var bodyParser = require('body-parser');
 var router = require('./routes/routes');
 var helper = require('./helper/helper')
 var fs = require('fs');
@@ -45,11 +45,20 @@ exports.postsRef = postsRef;
 // Initializing Express App
 var app = express();
 app.set('views', './src/views');
+app.use(function(req, res, next) {
+	res.header("Access-Control-Allow-Origin", "*");
+	res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+	next();
+  });
+  
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-app.use(bodyParser.urlencoded({
-    extended: true
-}));
-app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded({
+//     extended: true
+// }));
+// app.use(bodyParser.json());
 
 // Express.static is used for accessing the static files in the code(like css, javascript files).
 // This will make files inside "src/views/css" directory accesible by going to localhost:<port>/file-name.css
@@ -79,6 +88,7 @@ app.get('/signup', router)
 app.post('/signup', router)
 app.get('/loginwithgoogle', router)
 app.post('/loginwithgoogle', router)
+app.post('/addcomment', router);
 
 // Initializing Handelbars
 var handlebars = require('express-handlebars');

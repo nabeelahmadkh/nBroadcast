@@ -5,13 +5,14 @@ var sidebar = require('./sidebar')
 
 // ViewPost Controller for Rendering the posts 
 exports.viewpost = function(req,res){
-    var query = req.query.post; 
+    var query = req.query.post;
 
     if (!helper.isEmpty(query)){
+        console.log("query is ", query);
         childPostRef = app.postsRef.child(query)
         childPostRef.once('value',function(childSnap){
             if(!helper.isEmpty(childSnap.val())){
-                var output = {title: childSnap.val().title, content: childSnap.val().content, date: childSnap.val().date, author: childSnap.val().author, sidebar: [], postByDate: [], user: null, tags: []};
+                var output = {title: childSnap.val().title, content: childSnap.val().content, date: childSnap.val().date, author: childSnap.val().author, sidebar: [], postByDate: [], user: null, tags: [], postId: query};
 
                 if (app.firebase.auth().currentUser){
                     console.log(' CURRENT ISRE IS IS ', app.firebase.auth().currentUser.displayName)

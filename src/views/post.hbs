@@ -88,6 +88,18 @@
             </div>
           </div>
 
+          <div class="card mb-4">
+            <div class="card-body">
+              <form>
+                <label for="exampleFormControlTextarea1"><b>Leave a Reply:</b></label>
+                <textarea class="form-control form-control-sm" id="userComment" placeholder="Comment:" rows="3" name="comment"></textarea>
+                <input class="form-control form-control-sm margin-top" type="text" placeholder="Name:" name="name" id="userName">
+                <input type="hidden" value={{postId}} name="postId" />
+                <button type="button" class="btn btn-success margin-top" onclick="add_comment('{{postId}}')">Submit</button>
+              </form> 
+            </div>
+          </div>
+
         </div>
 
         <!-- Sidebar Widgets Column -->
@@ -222,6 +234,40 @@
           else{
             document.getElementById("postbydate"+yearMonth).style.display = "block"
           }
+      }
+    </script>
+    <script>
+      function add_comment(postId){
+        console.log("post id is ", postId);
+        console.log("name is ", document.getElementById('userName').value);
+        console.log("comment is ", document.getElementById('userComment').value);
+        
+        var newComment = {
+          "postId": postId,
+          "name" : document.getElementById('userName').value,
+          "comment" : document.getElementById('userComment').value
+        };
+      
+        console.log("test ");
+        $.ajax(
+                {
+                    type: 'POST',
+                    url: 'http://localhost:3000/addcomment',
+                    dataType: 'json',
+                    data: JSON.stringify(newComment),
+                    contentType: 'application/json',
+                    success: function (data) {
+                        alert('success');
+                        $.each(data, function (i, theItem) {
+                            var combo = document.getElementById("cboFastBikes");
+                            
+                        });
+                    },
+                    error: function (msg, url, line) {
+                        alert('error trapped in error: function(msg, url, line)');
+                        alert('msg = ' + msg + ', url = ' + url + ', line = ' + line);
+                    }
+                });
       }
     </script>
   </body>
