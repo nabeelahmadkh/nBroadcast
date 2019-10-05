@@ -13,18 +13,24 @@ exports.addcomment = function(req, res){
         childPostRef = app.postsRef.child(req.body.postId);
         childPostRef.once('value',function(childSnap){
             var comments = null;
+            var currentDate = new Date();
+            const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+                                "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+            var customDate = currentDate.getDate() + '-' + monthNames[currentDate.getMonth()] + '-' + currentDate.getFullYear();
             if (!helper.isEmpty(childSnap.val().comments)){
                 var comment = [
                     {
                         "name" : req.body.name,
-                        "value" : req.body.comment
+                        "value" : req.body.comment,
+                        "date" : customDate
                     }
                 ];
                 comments = childSnap.val().comments.concat(comment);
             }else{
                 comments = [{
                                 "name" : req.body.name,
-                                "value" : req.body.comment
+                                "value" : req.body.comment,
+                                "date" : customDate
                             }];
             }
             childPostRef.update({

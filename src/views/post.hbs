@@ -98,7 +98,34 @@
                 <button type="button" class="btn btn-success margin-top" onclick="add_comment('{{postId}}')">Submit</button>
               </form> 
             </div>
+
+            <div id="comments">
+              {{#each comments}}
+                <div class="panel-body" id="singleComment">
+                  <hr>
+                  <ul class="media-list" id="commentList">
+                    <li class="media">
+                      <a href="#" class="pull-left">
+                        <img src="https://bootdey.com/img/Content/user_1.jpg" alt="" class="img-circle">
+                      </a>
+                      <div class="media-body">
+                        <span class="text-muted pull-right">
+                          <small class="text-muted">{{date}}</small>
+                        </span>
+                        <strong class="text-success">@{{name}}</strong>
+                        <p>
+                          {{value}}
+                        </p>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              {{/each}}
+            </div>
+
           </div>
+
+          
 
         </div>
 
@@ -248,7 +275,9 @@
           "comment" : document.getElementById('userComment').value
         };
       
-        console.log("test ");
+        var currentDate = new Date();
+        const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+                            "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
         $.ajax(
                 {
                     type: 'POST',
@@ -257,11 +286,9 @@
                     data: JSON.stringify(newComment),
                     contentType: 'application/json',
                     success: function (data) {
-                        alert('success');
-                        $.each(data, function (i, theItem) {
-                            var combo = document.getElementById("cboFastBikes");
-                            
-                        });
+                      $('#comments').prepend('<div class="panel-body"><hr><ul class="media-list" id="commentList"><li class="media"><a href="#" class="pull-left"><img src="https://bootdey.com/img/Content/user_1.jpg" alt="" class="img-circle"></a><div class="media-body"><span class="text-muted pull-right"><small class="text-muted">' + currentDate.getDate() + '-' + monthNames[currentDate.getMonth()] + '-' + currentDate.getFullYear() + '</small></span><strong class="text-success">@' + document.getElementById('userName').value + '</strong><p> ' + document.getElementById('userComment').value + ' </p></div></li></ul></div>')
+                      $('#userComment').val('');
+                      $('#userName').val('');
                     },
                     error: function (msg, url, line) {
                         alert('error trapped in error: function(msg, url, line)');

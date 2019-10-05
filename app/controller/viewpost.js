@@ -12,7 +12,9 @@ exports.viewpost = function(req,res){
         childPostRef = app.postsRef.child(query)
         childPostRef.once('value',function(childSnap){
             if(!helper.isEmpty(childSnap.val())){
-                var output = {title: childSnap.val().title, content: childSnap.val().content, date: childSnap.val().date, author: childSnap.val().author, sidebar: [], postByDate: [], user: null, tags: [], postId: query};
+                var comments = childSnap.val().comments !== undefined ? childSnap.val().comments.reverse() : null;
+                
+                var output = {title: childSnap.val().title, content: childSnap.val().content, date: childSnap.val().date, author: childSnap.val().author, sidebar: [], postByDate: [], user: null, tags: [], postId: query, comments: comments};
 
                 if (app.firebase.auth().currentUser){
                     console.log(' CURRENT ISRE IS IS ', app.firebase.auth().currentUser.displayName)
@@ -41,6 +43,7 @@ exports.viewpost = function(req,res){
                 postByDate.allPostsByDate(output)
                 output = postByDate.output
 
+                console.log("Output is ", output);
                 res.render('post', output);
             }
             else{
