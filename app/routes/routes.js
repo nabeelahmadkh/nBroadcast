@@ -9,13 +9,14 @@ var viewpost_controller = require('../controller/viewpost');
 var addnewpost_controller = require('../controller/addnewpost');
 var admin_controller = require('../controller/admin');
 var logout_controller = require('../controller/logout');
-var forgot_controller = require('../controller/forgotpassword')
+var forgot_controller = require('../controller/forgotpassword');
 var about_controller = require('../controller/about');
 var login_controller = require('../controller/login');
 var sitemap_controller = require('../controller/sitemap');
 var signup_controller = require('../controller/signup');
 var loginwithgoogle_controller = require('../controller/loginwithgoogle');
 var addcomment_controller = require('../controller/addcomment');
+var post_controller = require('../controller/viewposts');
 
 // Creating Routes, Add new Routes below
 router.get('/', homepage_controller.homepage);
@@ -38,6 +39,7 @@ router.post('/signup', signup_controller.signuppost);
 router.get('/loginwithgoogle', loginwithgoogle_controller.loginwithgoogleget);
 router.post('/loginwithgoogle', loginwithgoogle_controller.loginwithgooglepost);
 router.post('/addcomment', addcomment_controller.addcomment);
+router.get('/post/:id', post_controller.viewposts);
 
 
 // Exporting Router Module to be imported in app.js

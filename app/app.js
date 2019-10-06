@@ -89,6 +89,7 @@ app.post('/signup', router)
 app.get('/loginwithgoogle', router)
 app.post('/loginwithgoogle', router)
 app.post('/addcomment', router);
+app.get('/post/:id', router);
 
 // Initializing Handelbars
 var handlebars = require('express-handlebars');

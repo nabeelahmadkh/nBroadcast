@@ -67,7 +67,7 @@ exports.homepage = function(request, response){
         }
 		
 		for(var i = length-1; i >= 0; i --){
-            output.posts.push({title: jsonContent[i].title, preview: jsonContent[i].preview, date: jsonContent[i].date, name: jsonContent[i].name, author: jsonContent[i].author, image: jsonContent[i].image, key: jsonContent[i].key, key: keys[i]});
+            output.posts.push({title: jsonContent[i].title, preview: jsonContent[i].preview, date: jsonContent[i].date, name: jsonContent[i].name, author: jsonContent[i].author, image: jsonContent[i].image, key: jsonContent[i].key, key: keys[i], id: jsonContent[i].id});
         }
         // console.log("******** CHECK 5 ********")
 
@@ -81,7 +81,7 @@ exports.homepage = function(request, response){
         output = postByDate.output;
         // console.log("******** CHECK 6 ********")
 
-        // console.log('OUPUT IS *** ', output)
+        console.log('OUPUT IS *** ', output)
 
         response.render('index',output);
 	},function(err){

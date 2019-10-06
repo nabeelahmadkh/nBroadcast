@@ -42,7 +42,7 @@ exports.snapshotToArray = function snapshotToArray(snapshot) {
     snapshot.forEach(function(childSnapshot) {
         var item = childSnapshot.val();
         var key = childSnapshot.key;
-		returnArr.push({content: item.content, date: item.date, title: item.title, preview: item.preview, author: item.author, name: item.name, image: item.image1, key: key});
+		returnArr.push({content: item.content, date: item.date, title: item.title, preview: item.preview, author: item.author, name: item.name, image: item.image1, key: key, id: item.id});
 	});
     return returnArr;
 };
