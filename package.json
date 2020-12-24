@@ -10,7 +10,7 @@
   "author": "Nabeel Ahmad Khan",
   "license": "ISC",
   "dependencies": {
-    "date-and-time": "^0.6.2",
+    "date-and-time": "^0.14.2",
     "express": "^4.16.3",
     "express-handlebars": "^3.0.0",
     "firebase": "^4.6.2",
